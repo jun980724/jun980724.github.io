@@ -1,0 +1,21 @@
+name: CI Build and Test # 워크플로우의 이름을 설정합니다.
+
+on: # 이 워크플로우를 언제 실행할지 결정하는 트리거를 정의합니다.
+  push: # 'push' 이벤트가 발생했을 때 실행합니다.
+      branches: [ main ] # 'main' 브랜치에 push되었을 때만 실행합니다.
+        pull_request: # 'pull_request' 이벤트가 발생했을 때 실행합니다.
+            branches: [ main ] # 'main' 브랜치에 대한 pull request에서만 실행합니다.
+
+            jobs: # 워크플로우에서 실행할 작업을 정의합니다.
+              build: # 'build'라는 이름의 작업을 정의합니다.
+                  runs-on: ubuntu-latest # 작업이 실행될 가상 환경을 정의합니다. 여기서는 최신 Ubuntu 버전을 사용합니다.
+
+                      steps: # 'build' 작업에서 수행할 단계를 정의합니다.
+                          - uses: actions/checkout@v2 # GitHub 저장소 코드를 체크아웃하는 액션을 사용합니다.
+                                - name: Install dependencies # 단계의 이름을 설정합니다.
+                                        run: npm install # npm을 사용하여 의존성을 설치하는 명령을 실행합니다.
+                                            - name: Run build # 빌드를 실행하는 단계의 이름을 설정합니다.
+                                                    run: npm run build # 빌드 스크립트를 실행하는 명령을 실행합니다.
+                                                        - name: Run tests # 테스트를 실행하는 단계의 이름을 설정합니다.
+                                                                run: npm test # 테스트 스크립트를 실행하는 명령을 실행합니다.
+`
